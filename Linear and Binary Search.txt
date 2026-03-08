@@ -1,0 +1,722 @@
+1) Problem Statement
+
+In a local election, each candidate is assigned a unique numeric ID. After collecting the votes, you need to determine if any candidate received more than n−2 votes, where n is the total number of votes cast. This will help in identifying if there is a clear winner with significant support.
+
+Example : 
+Let's assume we've 2 [1, 4] candidates and 5 votes cast.
+After the voting, the final voting is as follows [1, 4, 1, 1, 1].
+As we can see, candidate 1 got more votes than n-2 (5 - 2 = 3) times, which is 4 times.
+So, the output is 1.
+
+Your task is to write a program that determines if there is a candidate ID that received more than n−2 votes using Linear search.
+Input format :
+The first line contains an integer n, representing the total number of votes cast.
+The second line contains n space-separated integers, each representing the candidate ID for each vote.
+Output format :
+The output displays the following format:
+If a candidate received more than n−2 votes, output their ID.
+If no candidate meets this criterion, output "No majority candidate found."
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+1 ≤ n ≤ 10
+1 ≤ candidate ID ≤ 100
+Sample test cases :
+Input 1 :
+5
+1 4 1 1 1
+Output 1 :
+1
+Input 2 :
+8
+12 12 12 12 13 12 12 12
+Output 2 :
+12
+Input 3 :
+5
+56 58 45 54 55
+Output 3 :
+No majority candidate found.
+
+class ElectionAnalysis
+{
+    public static int findMajorityCandidate(List<Integer> votes,int n)
+    {
+        for(int i=0;i<votes.size();i++)
+        {
+            int v=votes.get(i);
+            int c=0;
+            for(int j=0;j<votes.size();j++)
+            {
+                if(v==votes.get(j))
+                {
+                    c++;
+                }
+            }
+            if(c>n-2)
+            {
+                return v;
+            }
+        }
+        return -1;
+    }
+}
+2) Problem Statement
+
+Maya is a software engineer maintaining version releases for a mobile app. The version numbers are stored in a rotated sorted array, and some versions may be repeated due to patch updates. She wants to quickly find the earliest released version using binary search. 
+
+Help her find it efficiently.
+Input format :
+The first line of input consists of an integer n, representing the number of version numbers.
+The second line contains n space-separated integers, representing the version numbers in a rotated sorted order (duplicates allowed).
+Output format :
+The output prints an integer representing the earliest released version.
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+1 ≤ n ≤ 20
+0 ≤ version numbers ≤ 200
+Sample test cases :
+Input 1 :
+3
+1 3 5
+Output 1 :
+1
+Input 2 :
+5 
+2 2 2 0 1
+Output 2 :
+0
+
+class VersionHelper
+{
+    public static int findMin(List<Integer> v)
+    {
+        int l=0,r=v.size()-1;
+        int min=v.get(0);
+        while(l<r)
+        {
+            int m=(l+r)/2;
+            if(v.get(m)>v.get(r))
+            {
+                l=m+1;
+            }
+            else if(v.get(m)<v.get(r))
+            {
+                r=m;
+            }
+            else
+            {
+                r--;
+            }
+        }
+        return v.get(l);
+    }
+}
+3) Problem Statement
+
+Sathish is developing a simple inventory management system for a store. The store owner wants to update the stock levels of certain products based on the latest shipment. 
+
+Write a program that takes the current stock levels as input, along with the product code to search for and the new quantity received. Implement a linear search program to find the product in the inventory and update its stock with the new quantity. 
+
+Finally, print the updated inventory after the stock update.
+Input format :
+The first line consists of an integer N, representing the size of the inventory.
+The second line consists of N space-separated integers, representing the current stock levels.
+The third line consists of an integer X, representing the product code to search for.
+The fourth line consists of an integer M, representing the new quantity received.
+Output format :
+The output prints the updated array with the X replaced by M. Elements should be separated by a space.
+If the X is not found in the array, the output will be the same as the original array since no replacements are made.
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+1 ≤ N ≤ 10
+10 ≤ stock level ≤ 100
+10 ≤ M ≤ 100
+Sample test cases :
+Input 1 :
+5
+45 56 78 89 65
+78
+85
+Output 1 :
+45 56 85 89 65 
+Input 2 :
+8
+73 91 45 67 98 36 22 49
+73
+75
+Output 2 :
+75 91 45 67 98 36 22 49 
+Input 3 :
+4
+76 54 23 46
+87
+78
+Output 3 :
+76 54 23 46 
+
+class ArrayOperations
+{
+    public static void linearSearchAndReplace(int arr[],int searchValue,int newValue)
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]==searchValue)
+            {
+                arr[i]=newValue;
+            }
+        }
+    }
+}
+4) Problem Statement
+
+Imagine you are working as a librarian in a large library. The library uses an automated system to keep track of book positions on the shelves. Each book is assigned a unique ID, but some IDs are more common than others due to the popularity of certain editions.
+
+The system logs the positions of books in a sorted list based on their IDs. You need to find the first and last positions of a specific book ID in this sorted list using Binary Search.
+
+Example
+
+Input:
+10 
+1 2 2 2 2 3 4 8 8 8 
+8 
+Output:
+7 9
+Explanation:
+The first and last positions of book ID 8 are [7, 9] since the index is 0-based.
+Input format :
+The first line of input consists of an integer n, representing the total number of book IDs.
+The second line consists of a sorted list of n integers representing the book IDs.
+The third line consists of an integer x, representing the specific book ID to find.
+Output format :
+The output displays indices of the first and last occurrence of x (0-based index), separated by a space.
+If book ID x is not present on the shelves, print "NO OCCURRENCES".
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+1 ≤ n ≤ 20
+1 ≤ book ID, x ≤ 100
+Sample test cases :
+Input 1 :
+10 
+1 2 2 2 2 3 4 8 8 8 
+8
+Output 1 :
+7 9
+Input 2 :
+10 
+1 2 2 2 2 3 4 8 8 8 
+5
+Output 2 :
+NO OCCURRENCES
+
+class BookSearch
+{
+    public static int first(List<Integer> arr, int l, int h,int v,int n)
+    {
+        int r=-1;
+        while(l<=h)
+        {
+            int m=(l+h)/2;
+            if(arr.get(m)==v)
+            {
+                r=m;
+                h=m-1;
+            }
+            else if(arr.get(m)<v)
+            {
+                l=m+1;
+            }
+            else
+            {
+                h=m-1;
+            }
+        }
+        return r;
+    }
+    public static int last(List<Integer> arr, int l, int h,int v,int n)
+    {
+        int r=-1;
+        while(l<=h)
+        {
+            int m=(l+h)/2;
+            if(arr.get(m)==v)
+            {
+                r=m;
+                l=m+1;
+            }
+            else if(arr.get(m)<v)
+            {
+                l=m+1;
+            }
+            else
+            {
+                h=m-1;
+            }
+        }
+        return r;
+    }
+}
+5) Problem Statement
+
+Sharon is working on a sorted array of integers and wants to determine the count of elements that are less than or equal to a specific key. 
+
+As her supportive programmer, you are tasked with creating a program to assist Sharon in counting the number of elements that meet this criterion (less than or equal to the given key) using the Binary Search technique.
+
+Example : 
+If the size of the array is given as 7, the elements are [1, 2, 2, 2, 5, 7, 9], and the key is given as 2;
+There are 4 elements lesser/equal to 2, i.e., [1, 2, 2, 2].
+Input format :
+The first line of input consists of an integer N, representing the size of the array.
+The second line consists of N space-separated integers, the elements of the array.
+The third line consists of an integer key, the value to search for in the array.
+Output format :
+The output prints a single integer, representing the count of elements less than or equal to the given key.
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+In this scenario, the given test cases will fall under the following constraints:
+1 ≤ N ≤ 10
+1 ≤ array elements ≤ 100
+1 ≤ key ≤ 100
+Sample test cases :
+Input 1 :
+7
+1 2 2 2 5 7 9
+2
+Output 1 :
+4
+Input 2 :
+5
+12 15 27 35 48
+50
+Output 2 :
+5
+Input 3 :
+3
+48 69 85
+30
+Output 3 :
+0
+
+class BinarySearchHelper
+{
+    public static int binarySearchCount(List<Integer> arr,int key)
+    {
+        int count=0;
+        int l=0,h=arr.size()-1;
+        while(l<=h)
+        {
+            int m=(l+h)/2;
+            if(arr.get(m)<=key)
+            {
+                count=m+1;
+                l=m+1;
+            }
+            else
+            {
+                h=m-1;
+            }
+        }
+        return count;
+    }
+}
+6) Problem Statement
+
+Arsh is working on enhancing a recommendation system for a shopping application. He needs to develop a feature that suggests the closest product prices to a target price entered by a user. The list of product prices is sorted in non-decreasing order, and he wants the system to find the K closest prices to the target price. If two prices have the same difference from the target, the higher price should be preferred.
+
+To implement this feature, Arsh needs to write a program that identifies and prints the K closest prices to the given target price from the sorted list of prices.
+
+Example
+
+Input:
+5
+2 4 6 8 10
+5
+3
+Output:
+6 4 8 
+
+Explanation
+The closest prices to 5 are determined by their absolute differences: 6 (|6-5|=1), 4 (|4-5|=1), and 8 (|8-5|=3). Since ties are resolved by choosing the higher number, the closest prices are 6, 4, and 8. Therefore, the output is 6 4 8.
+Input format :
+The first line contains an integer n, representing the number of product prices.
+The second line contains n space-separated integers, representing the sorted product prices.
+The third line contains an integer x, denoting the target price.
+The fourth line contains an integer k, representing the number of closest prices to find.
+Output format :
+The output displays k space-separated integers representing the k closest prices to the target value.
+
+Refer to the sample output for the formatting specifications.
+Code constraints :
+1 ≤ n ≤ 10
+1 ≤ product prices ≤ 100
+Prices are given in ascending order.
+1 ≤ k ≤ n
+Sample test cases :
+Input 1 :
+5
+2 4 6 8 10
+5
+3
+Output 1 :
+6 4 8 
+Input 2 :
+8
+1 3 5 7 9 11 13 15
+10
+1
+class PriceRecommendation
+{
+    public static void printKClosest(List<Integer> p, int t,int k,int n)
+    {
+        int l=0,r=n-1;
+        while(r-l>=k)
+        {
+            int dl=Math.abs(p.get(l)-t);
+            int dr=Math.abs(p.get(r)-t);
+            if(dl>dr)
+            {
+                l++;
+            }
+            else if(dl<dr)
+            {
+                r--;
+            }
+            else
+            {
+                l++;
+            }
+        }
+        List<Integer> li=new ArrayList<>();
+        for(int i=l;i<=r;i++)
+        {
+            int s=p.get(i);
+            li.add(s);
+        }
+        li.sort((a,b)->{
+        int da=Math.abs(a-t);
+        int db=Math.abs(b-t);
+        if(da!=db) return da-db;
+        return b-a;
+       }  );
+        for(int i=0;i<li.size();i++)
+        {
+            System.out.print(li.get(i)+" ");
+        }
+    }
+}
+7) Problem Statement
+
+In a large-scale sales database, the management team is tasked with performing critical data analysis to ensure optimal business decisions. The database contains records of sales amounts for various transactions. For strategic planning, the team needs to:
+
+•	Quickly check if a particular sales amount has been recorded and, if so, identify its position in the dataset.
+•	To understand competitive performance and identify the second-best sales figures, which may be crucial for benchmarking and incentive planning.
+
+Your task is to find the sales amount and the second-best sales figure so that planning can be done more effectively using Linear Search.
+Input format :
+The first line consists of an integer N representing the number of transactions.
+The second line consists of N space-separated integers representing the sales amounts.
+The third line consists of an integer x representing the sales amount to search for in the dataset.
+Output format :
+The output is displayed in the following format:
+
+If the sales amount x is found in the array, print a message in the format: "Sales amount [x] is recorded at position [pos]", where pos is the sales amount in the dataset (1-based index).
+If the sales amount x is not found, print a message in the format: "Sales amount [x] is not recorded in the dataset".
+The second-highest sales amount in the dataset. If no second-highest amount exists, print: "No second highest sales amount found".
+
+Refer to the sample output for the formatting specifications.
+Code constraints :
+1 ≤ n ≤ 100
+1 ≤ sales amount ≤ 100
+1 ≤ x ≤ 100
+Sample test cases :
+Input 1 :
+5
+19 15 24 43 37
+24
+Output 1 :
+Sales amount 24 is recorded at position 3
+37
+Input 2 :
+5
+19 15 24 43 37
+16
+Output 2 :
+Sales amount 16 is not recorded in the dataset
+37
+Input 3 :
+1
+2
+3
+Output 3 :
+Sales amount 3 is not recorded in the dataset
+No second highest sales amount found
+
+class SalesAnalyzer
+{
+    static int search(List<Integer> arr,int x)
+    {
+        int p=-1;
+        for(int i=0;i<arr.size();i++)
+        {
+            if(x==arr.get(i))
+            {
+                p=i;
+            }
+        }
+        return p;
+    }
+    static int findSecondLargest(List<Integer> arr)
+    {
+        int h=arr.get(0);
+        int sh=-1;
+        for(int i=0;i<arr.size();i++)
+        {
+            //int n=arr.get(i);
+            if(h<arr.get(i))
+            {
+                sh=h;
+                h=arr.get(i);
+            }
+            else if(arr.get(i)>sh && arr.get(i)<h)
+            {
+                sh=arr.get(i);
+            }
+        }
+        return sh;
+    }
+}
+8) Problem Statement
+
+You are given a sorted integer array of numbers of length N. Your task is to implement a Binary Search algorithm to find a target integer in the array. 
+
+If the target is found, return the index of the target element; otherwise, print a message indicating that the element was not found in the array..
+Input format :
+The first line of input consists of an integer N, representing the size of the array.
+The second line consists of N space-separated integers, representing the elements of the sorted array.
+The third line consists of an integer S, representing the target integer to search for in the array.
+Output format :
+If the target element is found in the array, print "Element [S] found at index [Y]", where S is the target integer and Y is the index of the target element in the array (0-based index).
+If the target element is not found in the array, print "Element [S] not found in the array", where S is the target integer.
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+In this scenario, the given test cases will fall under the following constraints:
+1 ≤ N ≤ 10
+1 ≤ element, S ≤ 1000
+Sample test cases :
+Input 1 :
+6
+1 3 5 9 12 15
+9
+Output 1 :
+Element 9 found at index 3
+Input 2 :
+3
+45 54 32
+55
+Output 2 :
+Element 55 not found in the array
+Input 3 :
+3
+100 120 250
+250
+Output 3 :
+Element 250 found at index 2
+
+class BinarySearchLogic
+{
+    static int binarySearch(List<Integer> nums,int l,int h,int t)
+    {
+        while(l<=h)
+        {
+            int m=(l+h)/2;
+            if(nums.get(m)==t)
+            {
+                return m;
+            }
+            else if(nums.get(m)<t)
+            {
+                l=m+1;  
+            }
+            else
+            {
+                h=m-1;
+            }
+        }
+        return -1;
+    }
+}
+9) Problem Statement
+
+Sarah, an event organizer, is in need of a program to efficiently manage guest lists for her events using the Linear Search algorithm. She wants a tool that allows her to input a list of attendees and a set of keys (representing guest IDs) that she wants to search for.
+
+The program should identify the positions of the keys in the attendee list or notify Sarah if any of the keys are not found in the list.
+Input format :
+The first line of input is an integer, n, representing the number of attendees in the list.
+The second line consists of n space-separated integers, representing the guest IDs of the attendees.
+The third line is an integer, k, representing the number of keys (guest IDs) Sarah wants to search for.
+The fourth line consists of k space-separated integers, representing the guest IDs (keys) Sarah wants to search for.
+Output format :
+For each key, print "[k] found at position [x]" where x is the position (1-based index) of the key in the attendee list, separated by a line.
+If the key is not present, print "[k] not found in the array".
+
+Refer to the sample output for the formatting specifications.
+Code constraints :
+The test cases will fall under the following constraints:
+2 ≤ n, k ≤10
+1 ≤ ID ≤ 100
+Sample test cases :
+Input 1 :
+5
+10 20 30 40 50
+4
+40 20 60 10
+Output 1 :
+40 found at position 4
+20 found at position 2
+60 not found in the array
+10 found at position 1
+Input 2 :
+4
+11 22 33 44
+2
+22 55
+Output 2 :
+22 found at position 2
+55 not found in the array
+
+class GuestListSearch
+{
+    static void searchGuestList(List<Integer> a,List<Integer> k)
+    {
+        for(int i=0;i<k.size();i++)
+        {
+            boolean f=false;
+            for(int j=0;j<a.size();j++)
+            {
+                if(k.get(i)==a.get(j))
+                {
+                    System.out.println(k.get(i)+" found at position "+(j+1));
+                    f=true;
+                    break;
+                }
+            }
+            if(!f)
+            {
+                System.out.println(k.get(i)+" not found in the array");
+            }
+        }
+    }
+}
+10) Problem Statement
+
+Uma is passionate about exploring different countries and their unique characteristics. She recently obtained a sorted list of country names and wanted to create a program to find the index of a given country in the list.
+
+Knowing about Binary Search, she reached out to you for assistance in implementing this efficient search algorithm. 
+
+Can you help Uma achieve her goal?
+Input format :
+The first line of input consists of an integer n, representing the number of countries in the list.
+The second line consists of n space-separated strings, representing the names of n countries.
+The third line consists of a string t, representing the country name Uma wants to find in the list.
+Output format :
+If t is found in the list, print "The country [t] is found at index [x]." where t is the target country name and x is its index (0-based index) position.
+If the target country is not found, print "[t] is not found." where t is the target country name.
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+1 ≤ n ≤ 8
+The country names are case-sensitive.
+Sample test cases :
+Input 1 :
+5
+Canada India Japan Spain UK
+India
+Output 1 :
+The country India is found at index 1.
+Input 2 :
+5
+Canada India Japan Spain UK
+Germany
+Output 2 :
+Germany is not found.
+Input 3 :
+3
+India Russia UK
+russia
+Output 3 :
+russia is not found.
+
+class CountrySearchLogic
+{
+    static int findCountryIndex(List<String> c,String t)
+    {
+        int r=-1;
+        for(int i=0;i<c.size();i++)
+        {
+            if((c.get(i)).equals(t))
+            {
+                r=i;
+            }
+        }
+        return r;
+    }
+}
+11) Problem Statement
+
+Arun is given an array of integers where all elements appear twice, except for one element that appears only once. The goal is to find that single, non-duplicate element using a Linear Search algorithm. If the element is not found, print the appropriate message.
+
+Assist Arun in solving this challenge.
+Input format :
+The first line of input consists of an integer N, representing the number of elements in the array.
+The second line consists of N space-separated integers, representing the array elements.
+Output format :
+The output prints an integer, representing the single non-duplicate element in the given array.
+If no such element is found, print "No non-duplicate element found".
+
+Refer to the sample output for formatting specifications.
+Code constraints :
+The test cases will fall under the following constraints:
+1 ≤ N ≤ 15
+1 ≤ elements of the array ≤ 30
+Sample test cases :
+Input 1 :
+9
+1 1 2 3 3 4 4 8 8
+Output 1 :
+2
+Input 2 :
+7
+12 16 12 15 17 16 15
+Output 2 :
+17
+Input 3 :
+4
+14 26 14 26
+Output 3 :
+No non-duplicate element found
+
+class SingleNonDuplicateFinder
+{
+    static int findSingleNonDuplicate(List<Integer> a)
+    {
+        int r=-1;
+        HashMap<Integer,Integer> m=new HashMap<>();
+        for(int i=0;i<a.size();i++)
+        {
+            m.put(a.get(i),m.getOrDefault(a.get(i),0)+1);
+        }
+        for(Map.Entry<Integer,Integer> e:m.entrySet())
+        {
+            if(e.getValue()==1)
+            {
+              r=e.getKey();  
+            }
+        }
+        return r;
+    }
+}
