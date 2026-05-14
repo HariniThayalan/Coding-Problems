@@ -1,4 +1,4 @@
-select customer_number from Orders
+SELECT customer_number FROM Orders
 GROUP BY customer_number
-ORDER BY COUNT(*) DESC
+ORDER BY count(order_number) DESC
 LIMIT 1;
